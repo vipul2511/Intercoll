@@ -228,8 +228,8 @@ class NoteSummary extends Component {
         username: this.state.ERF,
         password: this.state.CET,
         from: this.state.ERF,
-        recipients: "agentupdates@intercoll.co.nz",
-        bcc: ["agentupdates@intercoll.co.nz"],
+        recipients: "Harshitashrimali980@gmail.com",
+        bcc: ["harshitashrimali980@gmail.com"],
         subject: this.state.subjectTitle,
         htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> <p>Notes: ${addnote}</p> <p>${fin}</p>`,
         attachmentPaths: [],
@@ -237,7 +237,7 @@ class NoteSummary extends Component {
         attachmentTypes: []//needed for android, in ios-only application, leave it empty: attachmentTypes:[]
       })
         .then(success => {
-          this.props.navigation.navigate('FinalSent');
+          this.props.navigation.navigate('FinalSent');8
           this.setState({ spinner: false })
         })
         .catch(err => {
@@ -257,8 +257,8 @@ class NoteSummary extends Component {
         username: this.state.ERF,
         password: this.state.CET,
         from: this.state.ERF,
-        recipients: "agentupdates@intercoll.co.nz",
-        bcc: ["agentupdates@intercoll.co.nz"],
+        recipients: "harshitashrimali980@gmail.com",
+        bcc: ["harshitashrimali980@gmail.com"],
         subject: this.state.subjectTitle,
         htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> <p>${fin}</p>`,
         attachmentPaths: [],
@@ -328,7 +328,7 @@ class NoteSummary extends Component {
               </ScrollView>
             </View>
             <View>
-              <Text style={styles.Adnote}>Add notes</Text>
+              <Text style={styles.Adnote}>Additional notes</Text>
               <TextInput style={styles.inputbox}
                 multiline={true}
                 numberOfLines={7}
@@ -338,13 +338,19 @@ class NoteSummary extends Component {
             </View>
             <View>
               <Text style={styles.Adnote}>Combine</Text>
-              <TextInput style={styles.inputbox}
+              <TextInput style={styles.Com_inputbox}
                 multiline={true}
                 numberOfLines={7}
                 onChangeText={this.onChangeCombine}
                 value={this.state.Combine}
               >
               </TextInput>
+            </View>
+            <View>
+            <TouchableOpacity style={styles.paymentBtn} onPress={()=>{this.props.navigation.navigate('Debtordetails')}}><Text style={styles.pay_word}>New debtor details / EFS / PFS
+</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.paymentBtn} onPress={()=>{this.props.navigation.navigate('NextofKin')}}><Text style={styles.pay_word}>Next of kin
+</Text></TouchableOpacity>
             </View>
             {this.activity()}
             <View style={{ marginTop: height * 0.01, marginBottom: 10 }}>
@@ -430,6 +436,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlignVertical: 'top'
   },
+  Com_inputbox:
+  {
+    marginTop: 8,
+    alignSelf: 'center',
+    width: width * 0.9,
+    height: width * 0.1,
+    overflow: 'scroll',
+    backgroundColor: '#F3F4F4',
+    borderWidth: 1,
+    borderColor: 'lightgray',
+    fontSize: 15,
+    textAlignVertical: 'top'
+  },
   send1: {
     marginTop: width * 0.02,
     fontSize: 25,
@@ -444,6 +463,23 @@ const styles = StyleSheet.create({
     padding: 2,
     fontFamily: Platform.OS === 'ios' ? 'Gill Sans' : 'sans-serif',
     color: '#808080'
+  },
+  paymentBtn: {
+    backgroundColor: '#3CB371',
+    height: 40,
+    marginLeft: 20,
+    marginRight: 20,
+    borderRadius: width * 0.02,
+    justifyContent:'center' ,
+    marginTop: 15 
+
+  },
+  pay_word: {
+    justifyContent: 'center',
+    textAlign: 'center',
+    fontSize: 20,
+    color: 'white',
+    fontFamily: Platform.OS === 'ios' ? 'Gill Sans' : 'sans-serif',
   }
 });
 export default NoteSummary;

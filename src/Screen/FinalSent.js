@@ -55,7 +55,7 @@ componentWillUnmount(){
           <Text style={styles.textbox}> <Text style={styles.username}>{this.state.UserName}</Text>, your field  visit update has been sent to Intercoll™</Text>
         </View>
         <View style={styles.arrowsButton}>
-         <TouchableOpacity onPress={this.backItems} style={styles.box1}><Image style={styles.arrow} source={require('../assets/arrow1.png')} /></TouchableOpacity>
+           <Icon name="home" color='#24a4dc' size={42} style={{ marginLeft: 8, marginTop: 10 }} onPress={() => this.props.navigation.navigate('FieldUpdate')} />
         </View>
       </ScrollView>
       </View>

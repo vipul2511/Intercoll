@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import {
   View,
   Image,
@@ -10,15 +10,19 @@ import {
   Text,
   KeyboardAvoidingView,
   TouchableOpacity,
-  BackHandler
+  BackHandler,
+  CheckBox,
+
 } from 'react-native';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-community/async-storage';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Checkbox from 'react-native-custom-checkbox';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +33,7 @@ class Login extends Component {
       spinner: false,
       screenName:this.props.route.name,
       val:'',
+      toggleCheckBox:'',
       no:'',
       users: [{name:'Abner',email:'abner@intercoll.co.nz',OPCode:'AD'}, {name:'Ashton',email:'Ashton@intercoll.co.nz',OPCode:'AG'}, {name:'Lee',email:'lee@intercoll.co.nz',OPCode:'LH'}, {name:'Luke',email:'luke@intercoll.co.nz',OPCode:'LB'}, {name:'Mark',email:'mrowson@intercoll.co.nz',OPCode:'MR'},
         {name:'Robert',email:'robert@intercoll.co.nz',OPCode:'RL'}, {name:'Kieran',email:'kieran@intercoll.co.nz',OPCode:'KS'}, {name:'William',email:'william@intercoll.co.nz',OPCode:'WP'}, {name:'Aaron',email:'astott@intercoll.co.nz',OPCode:'AA'}, {name:'Harley',email:'harley@intercoll.co.nz',OPCode:'HF'},
@@ -100,6 +105,7 @@ componentWillUnmount(){
        console.log("not executed");
      }
  } 
+
   render() {
     return (
       <SafeAreaView style={styles.container}>
@@ -136,6 +142,19 @@ componentWillUnmount(){
                   value={this.state.password}
                 />
                 </View>
+               <View style={styles.checkboxContainer}>
+               {/* <CheckBox  style={styles.checkbox}  disabled={false}
+    value={this.state.toggleCheckBox} 
+    onValueChange={(newValue) => this.setState({toggleCheckBox:newValue})}
+    /> */}
+    <Checkbox style={styles.checkbox}  disabled={false}
+    value={this.state.toggleCheckBox} 
+    onValueChange={(newValue) => this.setState({toggleCheckBox:newValue})}
+   
+    />
+  
+        <Text style={styles.label}>Remember me</Text>
+      </View>
                 <TouchableOpacity style={styles.login_btn} onPress={this.login}>
                   <Text style={styles.logoText}>Login</Text>
                 </TouchableOpacity>
@@ -188,6 +207,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     height: height * 0.06,
     margin: width * 0.1,
+    marginBottom: 15,
     marginTop: 1,
     padding: 10,
   },
@@ -227,6 +247,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginTop: 10,
     fontSize: 20,
+    fontFamily: Platform.OS === 'ios' ? 'Gill Sans' : 'sans-serif',
+  },
+  checkboxContainer: {
+    flexDirection: "row",
+   marginBottom: 15,
+   alignContent: 'center',
+   justifyContent: 'center',
+  },
+  checkbox: {
+    padding: 300,
+    alignSelf: "center",
+    color:'#21AAF9', 
+    margin:8,
+    borderColor: 'rgb(219,219,219)',    
+    borderWidth:2,
+    backgroundColor: '#F1F3F4'
+   
+  },
+  label: {
+    margin: 8,
+    fontSize: 16,
+    color: '#00008B',
     fontFamily: Platform.OS === 'ios' ? 'Gill Sans' : 'sans-serif',
   },
 });
