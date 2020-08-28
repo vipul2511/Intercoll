@@ -31,6 +31,39 @@ class NextofKin extends React.Component {
              console.log("not executed");
            }
          } 
+         fun = () => {
+          if ( this.state.No1name ==  '' || this.state.No2name == '')  {
+           if (this.state.N1Relationship == '' || this.state.No2Relationship) {
+                if(this.state.N1phone == ''|| this.state.N2phone ) {
+                  if(this.state.N1email == '' || this.state.N2email) {
+                  
+                      let obj = {
+                      No1Kin: this.state.No1name,
+                      Nok1Rel: this.state.N1Relationship,
+                      No1Phone: this.state.N1phone,
+                      No1Email: this.state.N1email,
+                     No2Kin: this.state.No2name,
+                      Nok2Relat: this.state.No2Relationship,
+                      No2Phone: this.state.N2phone,
+                      No2Email: this.state.N2email,
+                     }
+                     //console.log(obj);
+                     this.props.navigation.navigate('NoteSummary'); 
+                  }
+                  else {
+                    alert('Please enter email')
+                  }
+                }
+                else {
+                  alert('Please enter phone ')
+                }}
+                else {
+                  alert('Please enter Relationship')
+                }}
+                else {
+                  alert('Please enter name')
+                }
+              }    
     render() {
         return (
           <View style={{flex:1}} >
@@ -51,48 +84,48 @@ class NextofKin extends React.Component {
      <View style={{ flex: 1, backgroundColor:'#fff'}}>
                <View>
               <Text style={styles.Adnote}>NOK 1 Name</Text>
-              <TextInput style={styles.inputbox}>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({No1name:text})}}  value={this.state.No1name}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>NOK Relationship</Text>
-              <TextInput style={styles.inputbox}>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({N1email:text})}}  value={this.state.N1email}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>NOK Phone </Text>
-              <TextInput style={styles.inputbox}>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({N1phone:text})}}  value={this.state.N1phone}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>NOK Email</Text>
-              <TextInput style={styles.inputbox}>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({N1email:text})}}  value={this.state.N1email}>
               </TextInput>
             </View>
             <View style={{backgroundColor:'#fff'}}>
                 <Text style={styles.utext}>Next of Kin 2</Text>
                 <Text style={styles.Adnote}>NOK 2 Name</Text>
-                <TextInput style={styles.inputbox}>
+                <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({No2name:text})}}  value={this.state.No2name}>
               </TextInput>
                </View>
                <View>
               <Text style={styles.Adnote}>NOK 2 Relationship</Text>
-              <TextInput style={styles.inputbox}>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({No2Relationship:text})}}  value={this.state.No2Relationship}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>NOK 2 Phone </Text>
-              <TextInput style={styles.inputbox}>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({No2Phone:text})}}  value={this.state.No2Phone}>
               </TextInput>
             </View>
             <View>
-              <Text style={styles.Adnote}>NOK 2 Email</Text>
-              <TextInput style={styles.inputbox}>
+              <Text style={styles.Adnote} >NOK 2 Email</Text>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({N2email:text})}}  value={this.state.N2email}>
               </TextInput>
             </View>
               
             <View style={styles.arrowsButton}>
-            <TouchableOpacity onPress={()=>{this.props.navigation.navigate('NoteSummary')}} style={styles.box}><Image style={styles.arrow} source={require('../assets/arrow1.png')} /></TouchableOpacity>
+            <TouchableOpacity onPress={this.fun} style={styles.box}><Image style={styles.arrow} source={require('../assets/arrow1.png')} /></TouchableOpacity>
             </View>
          
             </View>
@@ -168,10 +201,12 @@ class NextofKin extends React.Component {
             borderWidth: 1,
             borderColor: 'lightgray',
             fontSize: 15,
-            textAlignVertical: 'top'
+            textAlignVertical: 'top',
+            textAlign:'center'
           },
           Add_inputbox :  {
             marginTop: 8,
+            textAlign:'center',
             alignSelf: 'center',
             width: width * 0.9,
             height: width * 0.20,

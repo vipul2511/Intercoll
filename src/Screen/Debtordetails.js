@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, TextInput, Dimensions, YellowBox, ActivityIndicator, BackHandler } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, TextInput, Dimensions, YellowBox, ActivityIndicator, BackHandler, Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -40,18 +40,44 @@ class Debtordetails extends React.Component {
            }
          } 
          fun = () => {
-         let obj = {
-            Phone: this.state.NewPhone,
-            Moblie: this.state.NewMoblie,
-            EmailEFS: this.state.Email,
-            Address:this.state.Address,
-            Emp_detaitls: this.state.EDetails,
-            Client_no: this.state.ClientNo
+          if ( this.state.NewPhone == '' || this.state.NewMoblie == '')  {
+           
+              if (this.state.Email == '') {
+                if(this.state.Address == '') {
+                  if(this.state.EDetails == '') {
+                    if(this.state.ClientNo == '') {
+                      let obj = {
+                        Phone: this.state.NewPhone,
+                        Moblie: this.state.NewMoblie,
+                        EmailEFS: this.state.Email,
+                        Address:this.state.Address,
+                        Emp_detaitls: this.state.EDetails,
+                        Client_no: this.state.ClientNo
+                      }
+                      console.log(obj);
+                      // AsyncStorage.setItem('New_obj' , JSON.stringify(obj));
+                  
+                      this.props.navigation.navigate('NoteSummary'); 
+                     }
+          else {
+            alert('Please enter client no')
           }
-          console.log(obj);
-          AsyncStorage.setItem('New_obj' , JSON.stringify(obj));
+      }
+      else {
+        alert('Please enter address')
+      }
+    }
+    else {
+      alert('Please enter  email')
+    }
+  }
+else {
+  alert('Please enter phone no')
+}
+
+          }
+
         
-          this.props.navigation.navigate('NoteSummary'); 
       }
      
          
@@ -174,7 +200,7 @@ class Debtordetails extends React.Component {
           inputbox:
           {
             marginTop: 8,
-            alignSelf: 'center',
+           alignSelf: 'center',
             width: width * 0.9,
             height: width * 0.1,
             overflow: 'scroll',
@@ -182,7 +208,8 @@ class Debtordetails extends React.Component {
             borderWidth: 1,
             borderColor: 'lightgray',
             fontSize: 15,
-            textAlignVertical: 'top'
+            textAlignVertical: 'top',
+            textAlign:'center'
           },
           Add_inputbox :  {
             marginTop: 8,
@@ -194,7 +221,8 @@ class Debtordetails extends React.Component {
             borderWidth: 1,
             borderColor: 'lightgray',
             fontSize: 15,
-            textAlignVertical: 'top'
+            textAlignVertical: 'top',
+            textAlign:'center'
           },
 
       });
