@@ -39,7 +39,7 @@ class Debtordetails extends React.Component {
              console.log("not executed");
            }
          } 
-         fun = () => {
+         submit = async() => {
          let obj = {
             Phone: this.state.NewPhone,
             Moblie: this.state.NewMoblie,
@@ -49,9 +49,11 @@ class Debtordetails extends React.Component {
             Client_no: this.state.ClientNo
           }
           console.log(obj);
-          AsyncStorage.setItem('New_obj' , JSON.stringify(obj));
-        
+         await AsyncStorage.setItem('New_obj',JSON.stringify(obj)).then(success=>{
           this.props.navigation.navigate('NoteSummary'); 
+         });
+        
+          
       }
      
          
@@ -106,7 +108,7 @@ class Debtordetails extends React.Component {
               </TextInput>
             </View>
             <View style={styles.arrowsButton}>
-            <TouchableOpacity onPress={this.fun} style={styles.box}><Image style={styles.arrow} source={require('../assets/arrow1.png')} /></TouchableOpacity>
+            <TouchableOpacity onPress={this.submit} style={styles.box}><Image style={styles.arrow} source={require('../assets/arrow1.png')} /></TouchableOpacity>
             </View>
          
             </View>
