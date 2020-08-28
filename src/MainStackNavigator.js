@@ -13,7 +13,8 @@ import Payment from './Screen/Payment';
 import NoteSummary from './Screen/NoteSummary';
 import FinalSent from './Screen/FinalSent';
 import Description from './Screen/Description';
-
+import Debtordetails from './Screen/Debtordetails';
+import NextofKin from './Screen/NextofKin';
 
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
@@ -36,6 +37,8 @@ function Root(){
     <Stack.Screen name="Payment" component={Payment} />
     <Stack.Screen name="NoteSummary" component={NoteSummary} />
     <Stack.Screen name="FinalSent" component={FinalSent} />
+    <Stack.Screen name="Debtordetails" component={Debtordetails} />
+    <Stack.Screen name="NextofKin" component={NextofKin} />
    </Stack.Navigator>
     
   );

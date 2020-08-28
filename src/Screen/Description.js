@@ -23,8 +23,8 @@ export default class Description extends Component {
           ['Face book Message'],
           ['Gone no address'],
           ['Left Message To Call'],
-          ['New address obtained'],
-          ['New phone number obtained'],
+          ['No Property Access'],
+          ['Wage Redirection'],
           ['No Further Information'],
           ['No one is at home'],
           ['Notice of proceedings served'],
@@ -39,8 +39,8 @@ export default class Description extends Component {
           ['Vacant Property'],
           ['Veda Search']
         ],
-        tableTitle: ['AGW', 'Business card','CX','Details Conf','Disputed','Dtr known at address','Dtr not home','Dtr unknown','EFS','FB Message','GNA','LMTC','New Add',
-        'New Phn','NFI','No one home','NOP Served','On WINZ','Payment','PFS','Request Docs','Revisit','RSL','SWD','SWO','Vacant Prop','Veda'],
+        tableTitle: ['AGW', 'Business card','CX','Details Conf','Disputed','Dtr known at address','Dtr not home','Dtr unknown','EFS','FB Message','GNA','LMTC','NO ACCESS',
+        'WAGE RDR','NFI','No one home','NOP Served','On WINZ','Payment','PFS','Request Docs','Revisit','RSL','SWD','SWO','Vacant Prop','Veda'],
       }
       this.backOne= this.backOne.bind(this);
     }

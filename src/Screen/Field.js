@@ -158,8 +158,8 @@ Toast.show(`${this.state.usernameid} something went wrong when trying to check-i
       username:er_PSSA,
       password: dee_ITN,
       from: er_PSSA,
-      recipients:"agentupdates@intercoll.co.nz",
-      bcc: ["agentupdates@intercoll.co.nz"],
+      recipients:"harshitashrimali980@gmail.com",
+      bcc: ["harshitashrimali980@gmail.com"],
       subject: 'Check In',
       htmlBody: `<h3>${this.state.usernameid} has checked in</h3>`,
       attachmentPaths: [],
@@ -350,6 +350,7 @@ exitText: {
     width: 130,
     height: 55,
     borderRadius: 10,
+    marginLeft: width*0.01,
 
   },
   ctext:

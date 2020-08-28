@@ -11,7 +11,7 @@ class CustomButton extends Component {
     super(props);
     this.state = {
       selected: [],
-      options: ["Dtr known at address","No one home","RSL", "Business Card", "SWD", "SWO", "New Add", "Vacant Prop", "New Phn", "Dtr not home", "FB Message", "Dtr Unknown", "Details Conf", "CX", "Disputed"
+      options: ["Dtr known at address","No one home","RSL", "Business Card", "SWD", "SWO","NO ACCESS","Vacant Prop", "WAGE RDR","Dtr not home",  "FB Message", "Dtr Unknown", "Details Conf", "CX", "Disputed"
         , "Veda", "NOP Served", "NFI", "ON WINZ", "LMTC", "GNA", "Revisit","EFS","PFS","Request Docs","AGW"],
       active: false,
       ccid: null,
@@ -37,7 +37,7 @@ class CustomButton extends Component {
    backItem(){
      let screen= this.state.screenName;
       if(screen=="CustomButton"){
-       this.props.navigation.goBack();
+       this.props.navigation.navigate("FieldUpdate");
        return true;
      }else{
        console.log("not executed");
