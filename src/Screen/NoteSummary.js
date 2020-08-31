@@ -42,7 +42,25 @@ class NoteSummary extends Component {
       payItem: null,
       payment: '',
       Combine: '',
-      CombineVal: true
+      CombineVal: true,
+      NewPhone:'',
+      NewAddress:'',
+      NewMobile:'',
+      NewEmail:'',
+      NewAddress:'',
+      EmploymentDetails:'',
+      ClientNumber:'',
+      No1Kin:'',
+      Nok1Rel:'',
+      No1Phone:'',
+      No1Email:'',
+      No2Kin:'',
+      Nok2Relat:'',
+      No2Phone:'',
+      No2Email:'',
+      newObjDebtor:'',
+      objNextKin:''
+
     }
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
   }
@@ -57,7 +75,42 @@ class NoteSummary extends Component {
     console.log(`the data of first${this.state.newData}`);
   }
   getData = async () => {
-    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick)
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+
+    console.log("before the new obj")
+    let newDebtor = await AsyncStorage.getItem("New_obj").then(success=>{
+      if(success){
+        let convertedData=JSON.parse(success);
+        console.log('converted Data',convertedData);
+        this.setState({newObjDebtor:convertedData});
+        this.setState({NewPhone:convertedData.Phone});
+        this.setState({NewMobile:convertedData.Moblie});
+        this.setState({NewEmail:convertedData.EmailEFS});
+        this.setState({NewAddress:convertedData.Address});
+        this.setState({EmploymentDetails:convertedData.Emp_detaitls});
+        this.setState({ClientNumber:convertedData.Client_no});
+      }
+    });
+    console.log('newDebtor',newDebtor);
+     
+    await AsyncStorage.getItem('NextKin').then(succ=>{
+      if(succ){
+        let dataIntoKin=JSON.parse(succ);
+        console.log('Next KIn',dataIntoKin);
+        this.setState({objNextKin:dataIntoKin});
+        this.setState({No1Kin:dataIntoKin.No1Kin});
+        this.setState({Nok1Rel:dataIntoKin.Nok1Rel});
+        this.setState({No1Phone:dataIntoKin.No1Phone});
+        this.setState({No1Email:dataIntoKin.No1Email});
+        if(dataIntoKin.No2Kin&&dataIntoKin.Nok2Relat&&dataIntoKin.No2Phone&&dataIntoKin.No2Email){
+          console.log('working');
+        this.setState({ No2Kin:dataIntoKin.No2Kin});
+        this.setState({Nok2Relat:dataIntoKin.Nok2Relat});
+        this.setState({No2Phone:dataIntoKin.No2Phone});
+        this.setState({No2Email:dataIntoKin.No2Email});
+        }
+      }
+    })
     let list = this.state.getValue;
     let data1 = await AsyncStorage.getItem("Update");
     console.log("this is data" + data1);
@@ -149,6 +202,7 @@ class NoteSummary extends Component {
     this.setState({ perScreen: nam });
     let WQE = base64.decode(this.state.AscData);
     let IWQ = base64.decode(this.state.GFT);
+    
   }
   onChangeCombine = (text) => {
     const num = text.replace(/[^0-9,]/g, "");
@@ -231,13 +285,20 @@ class NoteSummary extends Component {
         recipients: "Harshitashrimali980@gmail.com",
         bcc: ["harshitashrimali980@gmail.com"],
         subject: this.state.subjectTitle,
-        htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> <p>Notes: ${addnote}</p> <p>${fin}</p>`,
+        htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> <p>Notes: ${addnote}</p> 
+                       <p>${this.state.NewPhone}</p> <p>${this.state.NewEmail}</p> <p>${this.state.NewAddress}</p> <p>${this.state.EmploymentDetails}</p> <p>${this.state.ClientNumber}</p> <p>${this.state.No1Kin}</p> 
+                       <p>${this.state.Nok1Rel}</p> <p>${this.state.No1Phone}</p> <p>${this.state.No1Email}</p> <p>${this.state.No2Kin}</p> <p>${this.state.Nok2Relat}</p> <p>${this.state.No2Phone}</p> <p>${this.state.No2Email}</p>
+                       <p>${fin}</p>`,
         attachmentPaths: [],
         attachmentNames: [],//only used in android, these are renames of original files. in ios filenames will be same as specified in path. In ios-only application, leave it empty: attachmentNames:[] 
         attachmentTypes: []//needed for android, in ios-only application, leave it empty: attachmentTypes:[]
       })
         .then(success => {
-          this.props.navigation.navigate('FinalSent');8
+          this.props.navigation.navigate('FinalSent');
+          AsyncStorage.removeItem('New_obj');
+          AsyncStorage.removeItem('Field_call');
+          AsyncStorage.removeItem('payment');
+          AsyncStorage.removeItem('NextKin');
           this.setState({ spinner: false })
         })
         .catch(err => {
@@ -260,13 +321,19 @@ class NoteSummary extends Component {
         recipients: "harshitashrimali980@gmail.com",
         bcc: ["harshitashrimali980@gmail.com"],
         subject: this.state.subjectTitle,
-        htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> <p>${fin}</p>`,
+        htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> 
+        <p>${this.state.NewPhone}</p> <p>${this.state.NewEmail}</p> <p>${this.state.NewAddress}</p> <p>${this.state.EmploymentDetails}</p> <p>${this.state.ClientNumber}</p> <p>${this.state.No1Kin}</p> 
+                       <p>${this.state.Nok1Rel}</p> <p>${this.state.No1Phone}</p> <p>${this.state.No1Email}</p> <p>${this.state.No2Kin}</p> <p>${this.state.Nok2Relat}</p> <p>${this.state.No2Phone}</p> <p>${this.state.No2Email}</p> <p>${fin}</p>`,
         attachmentPaths: [],
         attachmentNames: [],//only used in android, these are renames of original files. in ios filenames will be same as specified in path. In ios-only application, leave it empty: attachmentNames:[] 
         attachmentTypes: []//needed for android, in ios-only application, leave it empty: attachmentTypes:[]
       })
         .then(success => {
           this.props.navigation.navigate('FinalSent');
+          AsyncStorage.removeItem('New_obj');
+          AsyncStorage.removeItem('NextKin');
+          AsyncStorage.removeItem('payment');
+         AsyncStorage.removeItem('Field_call');
           this.setState({ spinner: false })
         })
         .catch(err => {
@@ -279,16 +346,24 @@ class NoteSummary extends Component {
     this.setState({ spinner: false })
   }
   };
-  backItem = () => {
+  backItem = async() => {
+    await AsyncStorage.removeItem('NextKin');
+    await AsyncStorage.removeItem('New_obj');
+    await AsyncStorage.removeItem('Field_call');
+    await AsyncStorage.removeItem('payment');
     this.props.navigation.navigate('CustomButton');
+
   }
 
   listOption = () => {
     return this.state.getValue.map((item, index) => {
-      return (<View key={index}>
+      return (
+       
+      <View key={index}>
         <Text style={styles.noteText}>
-          {item.OPCode}, {this.state.fieldNumber}, {item.newDate}, {item.Time}, {item.Address},  {Object.values(this.state.newData).join(",  ")} </Text>
+          {item.OPCode}, {this.state.fieldNumber}, {item.newDate}, {item.Time}, {item.Address},  {Object.values(this.state.newData).join(",  ")} {Object.values(this.state.newObjDebtor).join(", ")+","} {Object.values(this.state.objNextKin).join(", ")}  </Text>
       </View>
+   
       );
     })
   }
@@ -317,16 +392,13 @@ class NoteSummary extends Component {
           />
           <View>
             <View>
-            </View>
-            <View>
-              <ScrollView>
+            </View>  
+                  
                 <View style={styles.textBox}>
-                  <ScrollView>
+                <ScrollView nestedScrollEnabled={true}>
                     {this.listOption()}
-                  </ScrollView>
+                    </ScrollView>
                 </View>
-              </ScrollView>
-            </View>
             <View>
               <Text style={styles.Adnote}>Additional notes</Text>
               <TextInput style={styles.inputbox}
@@ -340,6 +412,7 @@ class NoteSummary extends Component {
               <Text style={styles.Adnote}>Combine</Text>
               <TextInput style={styles.Com_inputbox}
                 multiline={true}
+                maxLength={50}
                 numberOfLines={7}
                 onChangeText={this.onChangeCombine}
                 value={this.state.Combine}
@@ -413,6 +486,7 @@ const styles = StyleSheet.create({
   },
   textBox:
   {
+    flex:1,
     marginTop: 20,
     paddingLeft: 4,
     alignSelf: 'center',
@@ -421,7 +495,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3F4F4',
     borderWidth: 1,
     borderColor: 'lightgray',
-    overflow: 'scroll',
+   
   },
   inputbox:
   {

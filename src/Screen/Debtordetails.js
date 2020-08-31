@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, Image, StyleSheet, TextInput, Dimensions, YellowBox, ActivityIndicator, BackHandler } from 'react-native';
+import { View, Text, TouchableOpacity, Image, StyleSheet, TextInput, Dimensions, YellowBox, ActivityIndicator, BackHandler, Alert } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Entypo';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -30,28 +30,55 @@ class Debtordetails extends React.Component {
          BackHandler.removeEventListener('hardwareBackPressed',this.backItems)
         }
          backItems(){
-           let screen= this.state.screenName;
-            if(screen=="UpdateProfile"){
-             this.props.navigation.navigate('FieldUpdate');
+             this.props.navigation.goBack();
              return true;
-              }
-           else{
-             console.log("not executed");
-           }
          } 
-         fun = () => {
-         let obj = {
-            Phone: this.state.NewPhone,
-            Moblie: this.state.NewMoblie,
-            EmailEFS: this.state.Email,
-            Address:this.state.Address,
-            Emp_detaitls: this.state.EDetails,
-            Client_no: this.state.ClientNo
+         fun = async() => {
+          if ( this.state.NewPhone !== '' || this.state.Moblie!=='' )  {
+              if (this.state.Email !== '') {
+                if(this.state.Address !== '') {
+                  if(this.state.EDetails !== '') {
+                    if(this.state.ClientNo !== '') {
+                      let obj;
+                       obj = {
+                        EmailEFS:'New email: '+this.state.Email,
+                        Address:'New Address: '+this.state.Address,
+                        Emp_detaitls:'Employment details: '+this.state.EDetails,
+                        Client_no:'Client Number: '+this.state.ClientNo
+                      }
+                      if(this.state.Moblie!==''){
+                        obj.Moblie='New mobile: '+this.state.Moblie;
+                      }
+                      if(this.state.NewPhone !==''){
+                        obj.Phone='New phone: cell '+ this.state.NewPhone;
+                      }
+                      await AsyncStorage.setItem('New_obj' , JSON.stringify(obj)).then(suc=>{
+                        this.props.navigation.navigate('NoteSummary'); 
+                      });
+                  
+                      
+                     }
+          else {
+            alert('Please enter client no')
           }
-          console.log(obj);
-          AsyncStorage.setItem('New_obj' , JSON.stringify(obj));
+      }
+      else {
+        alert('Please enter employer Details')
+      }
+    }
+    else {
+      alert('Please enter  address')
+    }
+  }
+else {
+  alert('Please enter email');
+}
+
+          }else{
+            alert('Please enter Phone Number');
+          }
+
         
-          this.props.navigation.navigate('NoteSummary'); 
       }
      
          
@@ -76,33 +103,33 @@ class Debtordetails extends React.Component {
                <View>
               <Text style={styles.Adnote}>New Phone</Text>
               <TextInput keyboardType='numeric'   maxLength={10}
-              style={styles.inputbox}  onChange={(text)=>{this.setState({NewPhone:text})}}  value={this.state.NewPhone}>
+              style={styles.inputbox}  onChangeText={(text)=>{this.setState({NewPhone:text})}}  value={this.state.NewPhone}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>New Mobile</Text>
               <TextInput style={styles.inputbox} keyboardType='numeric'  
-            maxLength={10}  onChange={(text)=>{this.setState({NewMoblie:text})}}  value={this.state.NewMoblie}> 
+            maxLength={10}  onChangeText={(text)=>{this.setState({Moblie:text})}}  value={this.state.Moblie}> 
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>New Email / EFS</Text>
-              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({Email:text})}}  value={this.state.Email}>
+              <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({Email:text})}}  value={this.state.Email}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>New Address / PFS</Text>
-              <TextInput style={styles.Add_inputbox} onChange={(text)=>{this.setState({Address:text})}}  value={this.state.Address}>
+              <TextInput style={styles.Add_inputbox} onChangeText={(text)=>{this.setState({Address:text})}}  value={this.state.Address}>
               </TextInput>
             </View>
             <View style={{backgroundColor:'#fff'}}>
                 <Text style={styles.utext}>Employer Details</Text>
-                <TextInput style={styles.Add_inputbox} onChange={(text)=>{this.setState({EDetails:text})}}  value={this.state.EDetails}>
+                <TextInput style={styles.Add_inputbox} onChangeText={(text)=>{this.setState({EDetails:text})}}  value={this.state.EDetails}>
               </TextInput>
                </View>
                <View>
               <Text style={styles.Adnote}>CLIENT NUMBER</Text>
-              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({ClientNo:text})}}  value={this.state.ClientNo}>
+              <TextInput keyboardType="number-pad" style={styles.inputbox} onChangeText={(text)=>{this.setState({ClientNo:text})}}  value={this.state.ClientNo}>
               </TextInput>
             </View>
             <View style={styles.arrowsButton}>
@@ -174,7 +201,7 @@ class Debtordetails extends React.Component {
           inputbox:
           {
             marginTop: 8,
-            alignSelf: 'center',
+           alignSelf: 'center',
             width: width * 0.9,
             height: width * 0.1,
             overflow: 'scroll',
@@ -182,7 +209,8 @@ class Debtordetails extends React.Component {
             borderWidth: 1,
             borderColor: 'lightgray',
             fontSize: 15,
-            textAlignVertical: 'top'
+            textAlignVertical: 'top',
+            textAlign:'center'
           },
           Add_inputbox :  {
             marginTop: 8,
@@ -194,7 +222,8 @@ class Debtordetails extends React.Component {
             borderWidth: 1,
             borderColor: 'lightgray',
             fontSize: 15,
-            textAlignVertical: 'top'
+            textAlignVertical: 'top',
+            textAlign:'center'
           },
 
       });
