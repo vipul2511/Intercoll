@@ -17,7 +17,7 @@ class Payment extends Component {
             textInputValue: null,
             fieldNum:'',
             date: moment().format("dddd Do MMM YYYY"),                         
-            ModeType:null,
+            ModeType:'',
             active:false,
             spinner: false,
             screenName:this.props.route.name,
@@ -59,27 +59,28 @@ class Payment extends Component {
     DataFun =()=>{
       this.loading(); 
       if(this.state.textInputValue!==null && this.state.fieldNum!='' && this.state.fieldNum!=0.00){
-        if(this.state.ModeType !==null){
       setTimeout( ()=>{
         this.mergeDataSecond();
      }
       ,1000 );
-    } else{
-      alert("Please select mode of payment");
-    this.setState({spinner:false})
-    }
   }else{
     alert("Please fill details");
       this.setState({spinner:false})
   }
     }
     mergeDataSecond =async()=>{
-      let obj={
-        Mode:'Payment Method',
-        payMode: this.state.ModeType,
-        numeric:'$'+this.state.fieldNum, 
-        textData:this.state.textInputValue,
-        SetDate:'Starting  '+this.state.date,
+      let obj={}
+      if(this.state.ModeType!==''){
+        obj.Mode='Payment Method';
+        obj.payMode= this.state.ModeType;
+        obj.numeric='$'+this.state.fieldNum;
+        obj.textData=this.state.textInputValue;
+        obj.SetDate='Starting  '+this.state.date;
+      }else{
+        obj.Mode='Payment Method';
+        obj.numeric='$'+this.state.fieldNum;
+        obj.textData=this.state.textInputValue;
+        obj.SetDate='Starting  '+this.state.date;
       }
       console.log(obj);
       try {

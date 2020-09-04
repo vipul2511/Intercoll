@@ -273,7 +273,6 @@ class NoteSummary extends Component {
     if (this.state.Combine != '') {
       fin = 'Combine: ' + this.state.Combine;
     }
-    if(this.state.CombineVal ==true){
     if (addnote !== null) {
       RNSmtpMailer.sendMail({
         mailhost: "smtp.office365.com",
@@ -282,8 +281,8 @@ class NoteSummary extends Component {
         username: this.state.ERF,
         password: this.state.CET,
         from: this.state.ERF,
-        recipients: "Harshitashrimali980@gmail.com",
-        bcc: ["harshitashrimali980@gmail.com"],
+        recipients: "agentupdates@intercoll.co.nz",
+        bcc: ["agentupdates@intercoll.co.nz"],
         subject: this.state.subjectTitle,
         htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> <p>Notes: ${addnote}</p> 
                        <p>${this.state.NewPhone}</p> <p>${this.state.NewEmail}</p> <p>${this.state.NewAddress}</p> <p>${this.state.EmploymentDetails}</p> <p>${this.state.ClientNumber}</p> <p>${this.state.No1Kin}</p> 
@@ -318,8 +317,8 @@ class NoteSummary extends Component {
         username: this.state.ERF,
         password: this.state.CET,
         from: this.state.ERF,
-        recipients: "harshitashrimali980@gmail.com",
-        bcc: ["harshitashrimali980@gmail.com"],
+        recipients: "agentupdates@intercoll.co.nz",
+        bcc: ["agentupdates@intercoll.co.nz"],
         subject: this.state.subjectTitle,
         htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> 
         <p>${this.state.NewPhone}</p> <p>${this.state.NewEmail}</p> <p>${this.state.NewAddress}</p> <p>${this.state.EmploymentDetails}</p> <p>${this.state.ClientNumber}</p> <p>${this.state.No1Kin}</p> 
@@ -341,10 +340,7 @@ class NoteSummary extends Component {
           this.setState({ spinner: false })
         })
     }
-  }else{
-    alert("Please input correct CCID number");
-    this.setState({ spinner: false })
-  }
+ 
   };
   backItem = async() => {
     await AsyncStorage.removeItem('NextKin');
@@ -361,7 +357,7 @@ class NoteSummary extends Component {
        
       <View key={index}>
         <Text style={styles.noteText}>
-          {item.OPCode}, {this.state.fieldNumber}, {item.newDate}, {item.Time}, {item.Address},  {Object.values(this.state.newData).join(",  ")} {Object.values(this.state.newObjDebtor).join(", ")+","} {Object.values(this.state.objNextKin).join(", ")}  </Text>
+          {item.OPCode}, {this.state.fieldNumber}, {item.newDate}, {item.Time}, {item.Address},  {Object.values(this.state.newData).join(",  ")} {Object.values(this.state.newObjDebtor).join(", ")} {Object.values(this.state.objNextKin).join(", ")}  </Text>
       </View>
    
       );
@@ -412,7 +408,7 @@ class NoteSummary extends Component {
               <Text style={styles.Adnote}>Combine</Text>
               <TextInput style={styles.Com_inputbox}
                 multiline={true}
-                maxLength={50}
+                maxLength={20}
                 numberOfLines={7}
                 onChangeText={this.onChangeCombine}
                 value={this.state.Combine}

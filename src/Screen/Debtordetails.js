@@ -33,51 +33,49 @@ class Debtordetails extends React.Component {
              this.props.navigation.goBack();
              return true;
          } 
+         onChangeTextInput = (text) => {
+          const num= text.replace(/[^0-9]/g, "");
+          this.setState({ NewPhone: num });
+       }
+       onChangeTextInput1 = (text) => {
+        const num= text.replace(/[^0-9]/g, "");
+        this.setState({ Moblie: num });
+     }
+     onChangeTextInput2 = (text) => {
+      const num= text.replace(/[^0-9]/g, "");
+      this.setState({ ClientNo: num });
+   }
+     onChangeAddress=(text)=>{
+      const num= text.replace(/[^\w\s]/gi, "");
+        this.setState({ Address: num });
+       }
+       
          fun = async() => {
-          if ( this.state.NewPhone !== '' || this.state.Moblie!=='' )  {
-              if (this.state.Email !== '') {
-                if(this.state.Address !== '') {
-                  if(this.state.EDetails !== '') {
-                    if(this.state.ClientNo !== '') {
-                      let obj;
-                       obj = {
-                        EmailEFS:'New email: '+this.state.Email,
-                        Address:'New Address: '+this.state.Address,
-                        Emp_detaitls:'Employment details: '+this.state.EDetails,
-                        Client_no:'Client Number: '+this.state.ClientNo
-                      }
-                      if(this.state.Moblie!==''){
-                        obj.Moblie='New mobile: '+this.state.Moblie;
-                      }
-                      if(this.state.NewPhone !==''){
-                        obj.Phone='New phone: cell '+ this.state.NewPhone;
-                      }
-                      await AsyncStorage.setItem('New_obj' , JSON.stringify(obj)).then(suc=>{
-                        this.props.navigation.navigate('NoteSummary'); 
-                      });
-                  
-                      
-                     }
-          else {
-            alert('Please enter client no')
+         
+          let obj={};
+          let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+          if(this.state.NewPhone !==''){
+            obj.Phone='New phone: cell '+ this.state.NewPhone;
           }
-      }
-      else {
-        alert('Please enter employer Details')
-      }
-    }
-    else {
-      alert('Please enter  address')
-    }
-  }
-else {
-  alert('Please enter email');
-}
-
-          }else{
-            alert('Please enter Phone Number');
+          if(this.state.Moblie!==''){
+            obj.Moblie='New mobile: '+this.state.Moblie;
           }
-
+          if(this.state.Email!=''){
+            obj.EmailEFS='New email: '+this.state.Email;
+          }
+           if(this.state.Address!=''){
+             obj.Address='New Address: '+this.state.Address;
+           }
+           if(this.state.EDetails!=''){
+            obj.Emp_detaitls='Employment details: '+this.state.EDetails
+           }
+           if(this.state.ClientNo!=''){
+            obj.Client_no='Client Number: '+this.state.ClientNo
+           }
+           await AsyncStorage.setItem('New_obj' , JSON.stringify(obj)).then(suc=>{
+            this.props.navigation.navigate('NoteSummary'); 
+          });
+        
         
       }
      
@@ -103,23 +101,23 @@ else {
                <View>
               <Text style={styles.Adnote}>New Phone</Text>
               <TextInput keyboardType='numeric'   maxLength={10}
-              style={styles.inputbox}  onChangeText={(text)=>{this.setState({NewPhone:text})}}  value={this.state.NewPhone}>
+              style={styles.inputbox} maxLength={10} onChangeText={this.onChangeTextInput} value={this.state.NewPhone}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>New Mobile</Text>
               <TextInput style={styles.inputbox} keyboardType='numeric'  
-            maxLength={10}  onChangeText={(text)=>{this.setState({Moblie:text})}}  value={this.state.Moblie}> 
+            maxLength={10}  onChangeText={this.onChangeTextInput1}  value={this.state.Moblie}> 
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>New Email / EFS</Text>
-              <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({Email:text})}}  value={this.state.Email}>
+              <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({Email:text.trim()})}}  value={this.state.Email}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>New Address / PFS</Text>
-              <TextInput style={styles.Add_inputbox} onChangeText={(text)=>{this.setState({Address:text})}}  value={this.state.Address}>
+              <TextInput style={styles.Add_inputbox} onChangeText={this.onChangeAddress}  value={this.state.Address}>
               </TextInput>
             </View>
             <View style={{backgroundColor:'#fff'}}>
@@ -129,7 +127,7 @@ else {
                </View>
                <View>
               <Text style={styles.Adnote}>CLIENT NUMBER</Text>
-              <TextInput keyboardType="number-pad" style={styles.inputbox} onChangeText={(text)=>{this.setState({ClientNo:text})}}  value={this.state.ClientNo}>
+              <TextInput keyboardType="number-pad" style={styles.inputbox} onChangeText={this.onChangeTextInput2}  value={this.state.ClientNo}>
               </TextInput>
             </View>
             <View style={styles.arrowsButton}>

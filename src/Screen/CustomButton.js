@@ -45,7 +45,6 @@ class CustomButton extends Component {
    } 
   mergeData = async () => {
      this.setState({spinner:true});
-    if (this.state.selected && this.state.selected.length > 0) {
       let arr= this.state.selected;
       let object_convert = Object.assign({},arr);
       let dataForm = object_convert;
@@ -61,10 +60,7 @@ class CustomButton extends Component {
       }
       this.setState({spinner:false});
       this.props.navigation.navigate('NoteSummary');
-    } else {
-      this.setState({spinner:false});
-      alert("Please choose atleast one field");
-    }
+    
   }
   paymentType =async()=>{
     this.setState({spinner:true});

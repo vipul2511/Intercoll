@@ -27,6 +27,28 @@ class NextofKin extends React.Component {
         componentDidMount(){
             BackHandler.addEventListener('hardwareBackPressed',this.backItems);
         }
+        onChangeTextInput = (text) => {
+          const num= text.replace(/[^0-9]/g, "");
+          this.setState({ N1phone: num });
+       }
+       onChangeTextInput1 = (text) => {
+        const num= text.replace(/[^0-9]/g, "");
+        this.setState({ N2phone: num });
+     }
+    //  validate = (text) => {
+    //   console.log(text);
+    //   let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    //   if (reg.test(text) === false) {
+    //     alert('enter correct email Address')
+    //     this.setState({ email: text })
+    //     return false;
+    //   }
+    //   else {
+    //     this.setState({ email: text })
+    //     console.log("Email is Correct");
+    //   }
+    // }
+
         componentWillUnmount(){
          BackHandler.removeEventListener('hardwareBackPressed',this.backItems)
         }
@@ -36,55 +58,40 @@ class NextofKin extends React.Component {
          } 
          fun = async() => {
            console.log(this.state.N2phone);
-          if ( this.state.No1name !==  '' || this.state.No2name !== '')  {
-           if (this.state.N1Relationship !== '' || this.state.No2Relationship !== '' ) {
-                if(this.state.N1phone !== '' || this.state.N2phone !== '') {
-                  if(this.state.N1email !== '' || this.state.N2email !=='') {
-                  
-                      let obj = {
-                      No1Kin:'NOK 1 name: '+this.state.No1name,
-                      Nok1Rel:'NOK 1 Relationship: '+this.state.N1Relationship,
-                      No1Phone:'NOK 1 Phone: '+this.state.N1phone,
-                      No1Email:'NOK 1 Email: '+ this.state.N1email,
+           let obj={};
+                    let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+                    if(this.state.No1name!=''){
+                     obj.No1Kin='NOK 1 name: '+this.state.No1name;
+                    }
+                    if(this.state.N1Relationship!=''){
+                      obj.Nok1Rel='NOK 1 Relationship: '+this.state.N1Relationship;
+                    }
+                    if(this.state.N1email!=''){
+                      obj.No1Email='NOK 1 Email: '+ this.state.N1email;
+                    }
+                     if(this.state.N1phone!=''){
+                       obj.No1Phone='NOK 1 Phone: '+this.state.N1phone
                      }
-                     if(this.state.No1name!==''&& this.state.N1Relationship!==''&& this.state.N1phone!==''&&this.state.N1email!==''){
-                     if(this.state.No2name!==''&&this.state.No2Relationship!==''&& this.state.N2phone!==''&&this.state.N2email!==''){
+                     if(this.state.No2name!=''){
                       obj.No2Kin='NOK 2 Name: '+ this.state.No2name;
-                      obj.Nok2Relat='NOK 2 Relationship: '+ this.state.No2Relationship;
-                      obj.No2Phone='NOK 2 Phone: '+ this.state.N2phone;
-                      obj.No2Email='NOK 2 Email: '+this.state.N2email;
-                      console.log(obj);
-                     await AsyncStorage.setItem('NextKin',JSON.stringify(obj)).then(succ=>{
-                      this.props.navigation.navigate('NoteSummary'); 
-                     });
                      }
-                    }else{
-                      alert("Please fill the first section");
-                    }
-                    if(this.state.No1name!==''&& this.state.N1Relationship!==''&& this.state.N1phone!==''&&this.state.N1email!==''){
-                    console.log(obj);
+                     if(this.state.No2Relationship!=''){
+                      obj.Nok2Relat='NOK 2 Relationship: '+ this.state.No2Relationship;
+                     }
+                     if(this.state.N2phone!=''){
+                      obj.No2Phone='NOK 2 Phone: '+ this.state.N2phone;
+                     }
+                     if(this.state.N2email!=''){
+                      obj.No2Email='NOK 2 Email: '+this.state.N2email;
+                     }
                      await AsyncStorage.setItem('NextKin',JSON.stringify(obj)).then(succ=>{
                       this.props.navigation.navigate('NoteSummary'); 
                      });
-                    }
-                     
-                  }
-                  else {
-                    alert('Please enter email address')
-                  }
-                }
-                else {
-                  alert('Please enter phone number ')
-                }
-              }
-                else {
-                  alert('Please enter Relationship')
-                }
-              }
-                else {
-                  alert('Please enter name')
-                }
-              }    
+              }  
+              validate = (text) => {
+                console.log(text);
+               
+              }  
     render() {
         return (
           <View style={{flex:1}} >
@@ -117,12 +124,12 @@ class NextofKin extends React.Component {
             </View>
             <View>
               <Text style={styles.Adnote}>NOK 1 Phone </Text>
-              <TextInput style={styles.inputbox} keyboardType="numeric" onChangeText={(text)=>{this.setState({N1phone:text})}}  value={this.state.N1phone}>
+              <TextInput style={styles.inputbox} keyboardType="numeric" maxLength={10} onChangeText={this.onChangeTextInput}  value={this.state.N1phone}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>NOK 1  Email</Text>
-              <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({N1email:text})}}  value={this.state.N1email}>
+              <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({N1email:text.trim()})}}  value={this.state.N1email}>
               </TextInput>
             </View>
             <View style={{backgroundColor:'#fff'}}>
@@ -138,12 +145,12 @@ class NextofKin extends React.Component {
             </View>
             <View>
               <Text style={styles.Adnote}>NOK 2 Phone </Text>
-              <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({N2phone:text})}}  value={this.state.N2phone}>
+              <TextInput style={styles.inputbox} keyboardType="numeric" maxLength={10} onChangeText={this.onChangeTextInput1}  value={this.state.N2phone}>
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote} >NOK 2 Email</Text>
-              <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({N2email:text})}}  value={this.state.N2email}>
+              <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({N2email:text.trim()})}}  value={this.state.N2email}>
               </TextInput>
             </View>
               
