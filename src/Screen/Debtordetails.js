@@ -55,7 +55,7 @@ class Debtordetails extends React.Component {
           let obj={};
           let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
           if(this.state.NewPhone !==''){
-            obj.Phone='New phone: cell '+ this.state.NewPhone;
+            obj.Phone='New phone: '+ this.state.NewPhone;
           }
           if(this.state.Moblie!==''){
             obj.Moblie='New mobile: '+this.state.Moblie;

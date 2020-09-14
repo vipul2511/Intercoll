@@ -83,13 +83,37 @@ class NoteSummary extends Component {
         let convertedData=JSON.parse(success);
         console.log('converted Data',convertedData);
         this.setState({newObjDebtor:convertedData});
-        this.setState({NewPhone:convertedData.Phone});
-        this.setState({NewMobile:convertedData.Moblie});
-        this.setState({NewEmail:convertedData.EmailEFS});
-        this.setState({NewAddress:convertedData.Address});
-        this.setState({EmploymentDetails:convertedData.Emp_detaitls});
-        this.setState({ClientNumber:convertedData.Client_no});
-      }
+        if(convertedData.Phone!==undefined){
+          this.setState({NewPhone:convertedData.Phone});
+        }else{
+          this.setState({NewPhone:''});
+        }
+        if(convertedData.Moblie!==undefined ){
+          this.setState({NewMobile:convertedData.Moblie});
+        }else{
+          this.setState({NewMobile:''});
+        }
+        if(convertedData.EmailEFS!==undefined){
+          this.setState({NewEmail:convertedData.EmailEFS});
+        }else{
+          this.setState({NewEmail:''});
+        }
+        if(convertedData.Address!==undefined){
+          this.setState({NewAddress:convertedData.Address});
+        }else{
+          this.setState({NewAddress:''});
+        }
+        if(convertedData.Emp_detaitls!==undefined){
+          this.setState({EmploymentDetails:convertedData.Emp_detaitls});
+        }else{
+          this.setState({EmploymentDetails:''});
+        }
+        if(convertedData.Client_no!==undefined){
+          this.setState({ClientNumber:convertedData.Client_no});
+        }else{
+          this.setState({ClientNumber:''});
+        }
+        }
     });
     console.log('newDebtor',newDebtor);
      
@@ -98,18 +122,16 @@ class NoteSummary extends Component {
         let dataIntoKin=JSON.parse(succ);
         console.log('Next KIn',dataIntoKin);
         this.setState({objNextKin:dataIntoKin});
-        this.setState({No1Kin:dataIntoKin.No1Kin});
-        this.setState({Nok1Rel:dataIntoKin.Nok1Rel});
-        this.setState({No1Phone:dataIntoKin.No1Phone});
-        this.setState({No1Email:dataIntoKin.No1Email});
-        if(dataIntoKin.No2Kin&&dataIntoKin.Nok2Relat&&dataIntoKin.No2Phone&&dataIntoKin.No2Email){
+        if(dataIntoKin.No1Kin!==undefined)this.setState({No1Kin:dataIntoKin.No1Kin});
+        if(dataIntoKin.Nok1Rel!==undefined)this.setState({Nok1Rel:dataIntoKin.Nok1Rel});
+        if(dataIntoKin.No1Phone!==undefined )this.setState({No1Phone:dataIntoKin.No1Phone});
+        if(dataIntoKin.No1Email!==undefined )this.setState({No1Email:dataIntoKin.No1Email});
+        if(dataIntoKin.No2Kin!==undefined )this.setState({ No2Kin:dataIntoKin.No2Kin});
+        if(dataIntoKin.Nok2Relat!==undefined )this.setState({Nok2Relat:dataIntoKin.Nok2Relat});
+        if(dataIntoKin.No2Phone!==undefined )this.setState({No2Phone:dataIntoKin.No2Phone});
+        if(dataIntoKin.No2Email!==undefined )this.setState({No2Email:dataIntoKin.No2Email});
           console.log('working');
-        this.setState({ No2Kin:dataIntoKin.No2Kin});
-        this.setState({Nok2Relat:dataIntoKin.Nok2Relat});
-        this.setState({No2Phone:dataIntoKin.No2Phone});
-        this.setState({No2Email:dataIntoKin.No2Email});
-        }
-      }
+            }
     })
     let list = this.state.getValue;
     let data1 = await AsyncStorage.getItem("Update");
@@ -285,7 +307,7 @@ class NoteSummary extends Component {
         bcc: ["agentupdates@intercoll.co.nz"],
         subject: this.state.subjectTitle,
         htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> <p>Notes: ${addnote}</p> 
-                       <p>${this.state.NewPhone}</p> <p>${this.state.NewEmail}</p> <p>${this.state.NewAddress}</p> <p>${this.state.EmploymentDetails}</p> <p>${this.state.ClientNumber}</p> <p>${this.state.No1Kin}</p> 
+                       <p>${this.state.NewPhone}</p> <p>${this.state.NewMobile}</p> <p>${this.state.NewEmail}</p> <p>${this.state.NewAddress}</p> <p>${this.state.EmploymentDetails}</p> <p>${this.state.ClientNumber}</p> <p>${this.state.No1Kin}</p> 
                        <p>${this.state.Nok1Rel}</p> <p>${this.state.No1Phone}</p> <p>${this.state.No1Email}</p> <p>${this.state.No2Kin}</p> <p>${this.state.Nok2Relat}</p> <p>${this.state.No2Phone}</p> <p>${this.state.No2Email}</p>
                        <p>${fin}</p>`,
         attachmentPaths: [],
@@ -321,7 +343,7 @@ class NoteSummary extends Component {
         bcc: ["agentupdates@intercoll.co.nz"],
         subject: this.state.subjectTitle,
         htmlBody: `<p>Username: ${this.state.UserName}</p> <p>${this.state.fieldNumber}</p> <p>${this.state.opDateTime}</p> <p>${this.state.valueItem.Address}</p> <p>${this.state.fieldSend}</p> <p>${this.state.payment}</p> 
-        <p>${this.state.NewPhone}</p> <p>${this.state.NewEmail}</p> <p>${this.state.NewAddress}</p> <p>${this.state.EmploymentDetails}</p> <p>${this.state.ClientNumber}</p> <p>${this.state.No1Kin}</p> 
+        <p>${this.state.NewPhone}</p> <p>${this.state.NewMobile}</p> <p>${this.state.NewEmail}</p> <p>${this.state.NewAddress}</p> <p>${this.state.EmploymentDetails}</p> <p>${this.state.ClientNumber}</p> <p>${this.state.No1Kin}</p> 
                        <p>${this.state.Nok1Rel}</p> <p>${this.state.No1Phone}</p> <p>${this.state.No1Email}</p> <p>${this.state.No2Kin}</p> <p>${this.state.Nok2Relat}</p> <p>${this.state.No2Phone}</p> <p>${this.state.No2Email}</p> <p>${fin}</p>`,
         attachmentPaths: [],
         attachmentNames: [],//only used in android, these are renames of original files. in ios filenames will be same as specified in path. In ios-only application, leave it empty: attachmentNames:[] 
