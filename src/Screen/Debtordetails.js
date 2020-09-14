@@ -33,6 +33,7 @@ class Debtordetails extends React.Component {
              this.props.navigation.goBack();
              return true;
          } 
+<<<<<<< HEAD
          onChangeTextInput = (text) => {
           const num= text.replace(/[^0-9]/g, "");
           this.setState({ NewPhone: num });
@@ -76,6 +77,46 @@ class Debtordetails extends React.Component {
             this.props.navigation.navigate('NoteSummary'); 
           });
         
+=======
+         fun = () => {
+          if ( this.state.NewPhone == '' || this.state.NewMoblie == '')  {
+           
+              if (this.state.Email == '') {
+                if(this.state.Address == '') {
+                  if(this.state.EDetails == '') {
+                    if(this.state.ClientNo == '') {
+                      let obj = {
+                        Phone: this.state.NewPhone,
+                        Moblie: this.state.NewMoblie,
+                        EmailEFS: this.state.Email,
+                        Address:this.state.Address,
+                        Emp_detaitls: this.state.EDetails,
+                        Client_no: this.state.ClientNo
+                      }
+                      console.log(obj);
+                      // AsyncStorage.setItem('New_obj' , JSON.stringify(obj));
+                  
+                      this.props.navigation.navigate('NoteSummary'); 
+                     }
+          else {
+            alert('Please enter client no')
+          }
+      }
+      else {
+        alert('Please enter address')
+      }
+    }
+    else {
+      alert('Please enter  email')
+    }
+  }
+else {
+  alert('Please enter phone no')
+}
+
+          }
+
+>>>>>>> 76914cb7072c80930b854c527ea92409b5afca08
         
       }
      

@@ -56,6 +56,7 @@ class NextofKin extends React.Component {
              this.props.navigation.goBack();
              return true;
          } 
+<<<<<<< HEAD
          fun = async() => {
            console.log(this.state.N2phone);
            let obj={};
@@ -92,6 +93,41 @@ class NextofKin extends React.Component {
                 console.log(text);
                
               }  
+=======
+         fun = () => {
+          if ( this.state.No1name ==  '' || this.state.No2name == '')  {
+           if (this.state.N1Relationship == '' || this.state.No2Relationship) {
+                if(this.state.N1phone == ''|| this.state.N2phone ) {
+                  if(this.state.N1email == '' || this.state.N2email) {
+                  
+                      let obj = {
+                      No1Kin: this.state.No1name,
+                      Nok1Rel: this.state.N1Relationship,
+                      No1Phone: this.state.N1phone,
+                      No1Email: this.state.N1email,
+                     No2Kin: this.state.No2name,
+                      Nok2Relat: this.state.No2Relationship,
+                      No2Phone: this.state.N2phone,
+                      No2Email: this.state.N2email,
+                     }
+                     //console.log(obj);
+                     this.props.navigation.navigate('NoteSummary'); 
+                  }
+                  else {
+                    alert('Please enter email')
+                  }
+                }
+                else {
+                  alert('Please enter phone ')
+                }}
+                else {
+                  alert('Please enter Relationship')
+                }}
+                else {
+                  alert('Please enter name')
+                }
+              }    
+>>>>>>> 76914cb7072c80930b854c527ea92409b5afca08
     render() {
         return (
           <View style={{flex:1}} >
@@ -114,6 +150,7 @@ class NextofKin extends React.Component {
      <View style={{ flex: 1, backgroundColor:'#fff'}}>
                <View>
               <Text style={styles.Adnote}>NOK 1 Name</Text>
+<<<<<<< HEAD
               <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({No1name:text})}}  value={this.state.No1name}>
               </TextInput>
             </View>
@@ -130,27 +167,61 @@ class NextofKin extends React.Component {
             <View>
               <Text style={styles.Adnote}>NOK 1  Email</Text>
               <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({N1email:text.trim()})}}  value={this.state.N1email}>
+=======
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({No1name:text})}}  value={this.state.No1name}>
+              </TextInput>
+            </View>
+            <View>
+              <Text style={styles.Adnote}>NOK Relationship</Text>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({N1email:text})}}  value={this.state.N1email}>
+              </TextInput>
+            </View>
+            <View>
+              <Text style={styles.Adnote}>NOK Phone </Text>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({N1phone:text})}}  value={this.state.N1phone}>
+              </TextInput>
+            </View>
+            <View>
+              <Text style={styles.Adnote}>NOK Email</Text>
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({N1email:text})}}  value={this.state.N1email}>
+>>>>>>> 76914cb7072c80930b854c527ea92409b5afca08
               </TextInput>
             </View>
             <View style={{backgroundColor:'#fff'}}>
                 <Text style={styles.utext}>Next of Kin 2</Text>
                 <Text style={styles.Adnote}>NOK 2 Name</Text>
+<<<<<<< HEAD
                 <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({No2name:text})}}  value={this.state.No2name}>
+=======
+                <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({No2name:text})}}  value={this.state.No2name}>
+>>>>>>> 76914cb7072c80930b854c527ea92409b5afca08
               </TextInput>
                </View>
                <View>
               <Text style={styles.Adnote}>NOK 2 Relationship</Text>
+<<<<<<< HEAD
               <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({No2Relationship:text})}}  value={this.state.No2Relationship}>
+=======
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({No2Relationship:text})}}  value={this.state.No2Relationship}>
+>>>>>>> 76914cb7072c80930b854c527ea92409b5afca08
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote}>NOK 2 Phone </Text>
+<<<<<<< HEAD
               <TextInput style={styles.inputbox} keyboardType="numeric" maxLength={10} onChangeText={this.onChangeTextInput1}  value={this.state.N2phone}>
+=======
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({No2Phone:text})}}  value={this.state.No2Phone}>
+>>>>>>> 76914cb7072c80930b854c527ea92409b5afca08
               </TextInput>
             </View>
             <View>
               <Text style={styles.Adnote} >NOK 2 Email</Text>
+<<<<<<< HEAD
               <TextInput style={styles.inputbox} onChangeText={(text)=>{this.setState({N2email:text.trim()})}}  value={this.state.N2email}>
+=======
+              <TextInput style={styles.inputbox} onChange={(text)=>{this.setState({N2email:text})}}  value={this.state.N2email}>
+>>>>>>> 76914cb7072c80930b854c527ea92409b5afca08
               </TextInput>
             </View>
               
